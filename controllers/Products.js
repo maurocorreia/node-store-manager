@@ -26,10 +26,23 @@ const createNew = async (req, res, next) => {
     } catch (err) {
         next(err);
     }
+};
+
+const updateExistent = async (req, res, next) => {
+    try {
+        const { name, quantity } = req.body;
+        const { id } = req.params;
+        
+        const update = await productService.updateExistent(id, name, quantity);
+        res.status(200).json(update); 
+    } catch (err) {
+        next(err);
+    }
 }; 
 
 module.exports = {
     getAll,
     getById,
     createNew,
+    updateExistent,
 };

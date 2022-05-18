@@ -18,8 +18,16 @@ const createNew = async (name, quantity) => {
     return product;
 };
 
+const updateExistent = async (id, name, quantity) => {
+    const [update] = await connection.execute(`
+    UPDATE products SET name = ?, quantity = ?
+    WHERE products.id = ?;`, [name, quantity, id]);
+    return update;
+};
+
 module.exports = {
     getAll,
     getById,
     createNew,
+    updateExistent,
 };

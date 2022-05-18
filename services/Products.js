@@ -35,8 +35,22 @@ const createNew = async (name, quantity) => {
     };
 };
 
+const updateExistent = async (id, name, quantity) => {
+    const allProducts = await getAll();
+    const alreadyExist = allProducts.some((product) => product.id === Number(id));
+
+    if (!alreadyExist) {
+        const err = { status: 404, message: 'Product not found' };
+        throw err;
+    }
+
+    productModel.updateExistent(id, name, quantity);
+    return { id, name, quantity };
+};
+
 module.exports = {
     getAll,
     getById,
     createNew,
+    updateExistent,
 };
