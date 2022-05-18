@@ -16,7 +16,21 @@ const getById = async (id) => {
     return sale;
 };
 
+const createNew = async (sales) => {
+    const emptySale = await salesModel.createNew();
+
+    sales.forEach(async (sale) => {
+        await salesModel.fillNew(emptySale.insertId, sale.productId, sale.quantity);
+    });
+    
+    return {
+        id: emptySale.insertId,
+        itemsSold: sales,
+      };
+};
+
 module.exports = {
     getAll,
     getById,
+    createNew,
 };

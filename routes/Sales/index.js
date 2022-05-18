@@ -8,6 +8,6 @@ const SalesRouter = express.Router();
 
 SalesRouter.get('/', Sales.getAll);
 SalesRouter.get('/:id', Sales.getById);
-SalesRouter.post('/', saleValidate);
+SalesRouter.post('/', saleValidate, Sales.createNew);
 
 module.exports = SalesRouter;

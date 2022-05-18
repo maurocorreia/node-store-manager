@@ -1,12 +1,11 @@
 const saleValidate = (req, _res, next) => {
-    const { productId, quantity } = req.body;
-    if (!productId) next({ status: 400, message: '"productId" is required' });
-    if (!quantity) next({ status: 400, message: '"quantity" is required' });
-    if (quantity <= 0) {
- next(
-        { status: 422, message: '"quantity" must be greater than or equal to 1' },
-); 
-}
+    req.body.forEach((sale) => {
+        if (!sale.productId) next({ status: 400, message: '"productId" is required' });
+        if (!sale.quantity) next({ status: 400, message: '"quantity" is required' });
+        if (sale.quantity <= 0) {
+ next({ status: 422, message: '"quantity" must be greater than or equal to 1' }); 
+    } 
+});
     next();
 };
 

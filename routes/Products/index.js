@@ -8,6 +8,6 @@ const ProductRouter = express.Router();
 
 ProductRouter.get('/', Products.getAll);
 ProductRouter.get('/:id', Products.getById);
-ProductRouter.post('/', productValidate);
+ProductRouter.post('/', productValidate, Products.createNew);
 
 module.exports = ProductRouter;
