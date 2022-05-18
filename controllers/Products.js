@@ -38,6 +38,16 @@ const updateExistent = async (req, res, next) => {
     } catch (err) {
         next(err);
     }
+};
+
+const deleteExistent = async (req, res, next) => {
+    try {
+        const { id } = req.params;        
+        await productService.deleteExistent(id);
+        res.status(204).send();
+    } catch (err) {
+        next(err);
+    }
 }; 
 
 module.exports = {
@@ -45,4 +55,5 @@ module.exports = {
     getById,
     createNew,
     updateExistent,
+    deleteExistent,
 };
