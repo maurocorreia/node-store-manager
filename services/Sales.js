@@ -29,8 +29,14 @@ const createNew = async (sales) => {
       };
 };
 
+const updateExistent = async (saleId, quantity, productId) => {
+    salesModel.updateExistent(saleId, quantity, productId);
+    return { saleId, itemUpdated: [{ productId, quantity }] };
+};
+
 module.exports = {
     getAll,
     getById,
     createNew,
+    updateExistent,
 };

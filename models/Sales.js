@@ -50,9 +50,21 @@ const fillNew = async (saleId, productId, quantity) => {
     return saleProduct;
 };
 
+const updateExistent = async (saleId, quantity, productId) => {
+    const [update] = await connection.execute(
+        `
+        UPDATE StoreManager.sales_products
+        SET quantity = ?, product_id = ?
+        WHERE sale_id = ?`,
+        [quantity, productId, saleId],
+      );
+    return update;
+};
+
 module.exports = {
     getAll,
     getById,
     createNew,
     fillNew,
+    updateExistent,
 };

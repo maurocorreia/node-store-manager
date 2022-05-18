@@ -9,5 +9,6 @@ const SalesRouter = express.Router();
 SalesRouter.get('/', Sales.getAll);
 SalesRouter.get('/:id', Sales.getById);
 SalesRouter.post('/', saleValidate, Sales.createNew);
+SalesRouter.put('/:id', Sales.updateExistent);
 
 module.exports = SalesRouter;
