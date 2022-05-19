@@ -19,17 +19,14 @@ const getById = async (id) => {
 const createNew = async (sales) => {
     const emptySale = await salesModel.createNew();
 
-    sales.forEach(async (sale) => {
-        await salesModel.fillNew(emptySale.insertId, sale.productId, sale.quantity);
+    sales.forEach((sale) => {
+        salesModel.fillNew(emptySale.insertId, sale.productId, sale.quantity);
     });
     
-    return {
-        id: emptySale.insertId,
-        itemsSold: sales,
-      };
+    return { id: emptySale.insertId, itemsSold: sales };
 };
 
-const updateExistent = async (saleId, quantity, productId) => {
+const updateExistent = (saleId, quantity, productId) => {
     salesModel.updateExistent(saleId, quantity, productId);
     return { saleId, itemUpdated: [{ productId, quantity }] };
 };

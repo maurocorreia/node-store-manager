@@ -19,9 +19,9 @@ const createNew = async (name, quantity) => {
 };
 
 const updateExistent = async (id, name, quantity) => {
-    const [update] = await connection.execute(`
-    UPDATE StoreManager.products SET name = ?, quantity = ?
-    WHERE products.id = ?;`, [name, quantity, id]);
+    const [update] = await connection
+    .execute('UPDATE StoreManager.products SET name = ?, quantity = ? WHERE products.id = ?;',
+    [name, quantity, id]);
     return update;
 };
 

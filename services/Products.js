@@ -26,7 +26,6 @@ const createNew = async (name, quantity) => {
     }
 
     const response = await productModel.createNew(name, quantity);
-    console.log(response);
 
     return {
         id: response.insertId,
@@ -57,7 +56,7 @@ const deleteExistent = async (id) => {
         throw err;
     }
 
-    await productModel.deleteExistent(id);
+    productModel.deleteExistent(id);
 };
 
 module.exports = {
