@@ -40,10 +40,10 @@ const updateExistent = async (req, res, next) => {
     }
 };
 
-const deleteExistent = (req, res, next) => {
+const deleteExistent = async (req, res, next) => {
     try {
         const { id } = req.params;        
-        productService.deleteExistent(id);
+        await productService.deleteExistent(id);
         res.status(204).send();
     } catch (err) {
         next(err);
