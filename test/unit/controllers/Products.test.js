@@ -3,7 +3,7 @@ const sinon = require('sinon');
 const productService = require('../../../services/Products');
 const productController = require('../../../controllers/Products');
 
-describe('Product Controller', () => {
+describe('Products Controller', () => {
   describe('Função getAll()', () => {
     describe('Quando retorna uma resposta', () => {
       const mockResponse = [

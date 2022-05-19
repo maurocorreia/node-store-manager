@@ -3,7 +3,7 @@ const sinon = require('sinon');
 const productService = require('../../../services/Products');
 const productModel = require('../../../models/Products');
 
-describe('Product Services', () => {
+describe('Products Services', () => {
   describe('Função getAll()', () => {
     describe('Quando retorna uma resposta', () => {
       const mockResponse = [
@@ -96,10 +96,33 @@ describe('Product Services', () => {
 
       it('Retorna um objeto.', async () => {
         const response = await productService.updateExistent(id, name, quantity);
-        console.log(response);
         expect(response).to.be.an('object');
       })
     })
   });
 
-})
+  describe('Função deleteExistent()', () => {
+    describe('Quando a requisição é feita corretamente', () => {
+      const mockAll = [{ id: 1, name: "Produto", quantity: 15 }, { id: 2, name: "Produto", quantity: 15 }];
+      const mockOne = { id: 1, name: "Produto", quantity: 15 }
+
+      const id = 1;
+
+      before(() => {
+        sinon.stub(productModel, 'deleteExistent').resolves(mockOne);
+        sinon.stub(productModel, 'getAll').resolves(mockAll);
+      });
+
+      after(() => {
+        productModel.deleteExistent.restore();
+        productModel.getAll.restore();
+      });
+
+      it('Não retorna nada.', async () => {
+        const response = await productService.deleteExistent(id);
+        expect(response).to.be.undefined;
+      })
+    })
+  });
+
+});

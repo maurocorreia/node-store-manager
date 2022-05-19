@@ -55,5 +55,19 @@ describe('Sales Services', () => {
         expect(response).to.be.an('array');
       })
     })
+  });
+
+  describe('Função updateExistent()', () => {
+    describe('Quando retorna uma resposta', () => {
+
+      const saleId = 1;
+      const quantity = 10;
+      const productId = 1;
+
+      it('Retorna um objeto.', () => {
+        const response = saleService.updateExistent(saleId, quantity, productId);
+        expect(response).to.be.an('object');
+      })
+    })
   });  
 })
