@@ -55,16 +55,21 @@ describe('Product Services', () => {
 
   describe('Função createNew()', () => {
     describe('Quando a requisição é feita corretamente', () => {
+      const mockAll = [{ id: 1, name: "Produto", quantity: 15 }, { id: 2, name: "Produto", quantity: 15 }]
       const mockResponse = { id: 1, name: "produto", quantity: 10 };
 
       before(() => {
-        sinon.stub(productModel, 'createNew').resolves(mockResponse);
+        sinon.stub(productModel, 'createNew').resolves(mockResponse);        
+        sinon.stub(productModel, 'getAll').resolves(mockAll);
       });
 
-      after(() => productModel.createNew.restore());
+      after(() => {
+        productModel.createNew.restore();
+        productModel.getAll.restore();
+      });
 
       it('Retorna um objeto.', async () => {
-        const response = await productService.createNew();
+        const response = await productService.createNew("Product", 10);
         expect(response).to.be.an('object');
       })
     })
@@ -84,10 +89,14 @@ describe('Product Services', () => {
         sinon.stub(productModel, 'getAll').resolves(mockAll);
       });
 
-      after(() => productModel.updateExistent.restore());
+      after(() => {
+        productModel.updateExistent.restore();
+        productModel.getAll.restore();
+      });
 
       it('Retorna um objeto.', async () => {
         const response = await productService.updateExistent(id, name, quantity);
+        console.log(response);
         expect(response).to.be.an('object');
       })
     })
